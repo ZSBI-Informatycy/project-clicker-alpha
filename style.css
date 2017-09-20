@@ -1,8 +1,6 @@
 body, html {
     padding: 0px;
     margin: 0px;
-    width: 100%;
-    height: 100%;
     overflow-x: hidden;
 }
 
@@ -11,13 +9,15 @@ body {
     color: white;
     font-family: Hack,monospace;
     overflow-y: auto;
+    width: 1000px;
+    height: 600px;
 }
 
 #container {
     color: white;
     background-color: #333;
     width: 100%;
-    height: 1000px;
+    height: 100%;
     margin: auto;
     position: absolute;
     left: 0px;
@@ -29,7 +29,7 @@ body {
 #leftSection {
     background-color: dimgray;
     width: 30%;
-    height: inherit;
+    height: 100%;
     float: left;
     position: absolute;
     min-width: 100px;
@@ -37,9 +37,9 @@ body {
 }
 
 #rightSection {
-    background-color: gray;
+    background-color: black;
     width: 30%;
-    height: inherit;
+    height: 100%;
     float: left;
     position: absolute;
     min-width: 100px;
@@ -130,17 +130,19 @@ body {
     background-color: white;
     text-align: center;
     position: relative;
-    top: 12px;
-    margin-top: 10px;
-    left: 20px;
-    margin-left: 7px;
+    /*top: 2%;*/
+    margin-top: 1%;
+    top: 5%;
+    left: 5%;
+    font-size: 14px;
+    margin-left: 1%;
     float:left;
 }
 
 .buttonS {
     display: inline-block;
     vertical-align: middle;
-    line-height: 30px;
+    line-height: 20px;
 }
 
 #control {
@@ -184,14 +186,14 @@ body {
 #upgSpan {
     display: inline-block;
     vertical-align: middle;
-    margin-top: 25px;
+    margin-top: 5%;
     line-height: 30px;
 }
 
 #shop {
     margin-top: 20px;
     width: 100%;
-    height: 810px;
+    height: 80%;
     background-color: black;
 }
 
@@ -206,7 +208,7 @@ body {
 .shopElement {
     background-color: white;
     width: 90%;
-    height: 10%;
+    height: 50px;
     margin-left: auto;
     top: 10%;
     margin-bottom: 4%;
