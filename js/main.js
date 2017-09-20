@@ -23,7 +23,7 @@ Game.launch = function() {
     
         context.fillStyle = '#722210';
         context.beginPath();
-        context.arc(canvas.width/2, canvas.height/2, 125, 0, 2*Math.PI);
+        context.arc(canvas.width/2, canvas.height/2, 155, 0, 2*Math.PI);
         context.fill();
     };
 
