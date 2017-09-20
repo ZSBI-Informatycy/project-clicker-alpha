@@ -24,14 +24,12 @@ function clickEvent(event, amount) {
     var canClick = 1;
     
     var now = Date.now();
-    if(event) event.preventDefault();
-    else if(now-lastClick < 1000/250) {}
-    else {
-        var amount = amount ? amount : computedMouseCps;
-        earn(amount);
-        cookieCount += amount;
-    }
+    if(now-lastClick < 1000/250) {}
+    var amount = amount ? amount : computedMouseCps;
+    earn(amount);
+    cookieCount += amount;
     lastClick = now;
+    console.log(cookieCount);
 }
 
 // Main document load module
