@@ -41,19 +41,19 @@ Game.launch = function() {
         if(now-lastClick < 1000/250) {}
         var amount = amount ? amount : computedMouseCps;
         Game.earn(amount);
-        Game.clickCount += amount;
-        console.log(clickCount);
+        console.log(Game.clickCount);
+        document.getElementById('clickDisplay').innerHTML = Game.clickCount;
         lastClick = now;
     };
     
     // Click display
-    Game.clickDisplay = function(amount) {
-        document.getElementById('clickCounter').innerHTML = Game.clickCount;
-    }
+    Game.clickDisplay = function() {
+        document.getElementById('bigClicker').onClick = Game.clickEvent(onclick, 20);
+    };
 
     // Main document load module
     Game.initClicker();
-}
+};
 
 $(document).ready(function () {
     Game.launch();
