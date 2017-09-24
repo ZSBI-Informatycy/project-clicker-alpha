@@ -193,7 +193,7 @@ Game.Launch = function() {
         Game.UpgradesById = [];
         Game.UpgradesN = 0;
         Game.UpgradesOwned = 0;
-
+    
         Game.Upgrade = function(name, desc, price, icon, buyFunction) {
             this.id = Game.UpgradesN;
             this.name = name;
@@ -205,21 +205,21 @@ Game.Launch = function() {
             this.bought = 0;
             this.hide = 0;
             this.order = this.id;
-            if(order) this.order = order + this.id * 0.001;
+            if (order) this.order = order + this.id * 0.001;
             this.type = '';
-            if(type) this.type = type;
+            if (type) this.type = type;
             this.power = 0;
-            if(power) this.power = power;
+            if (power) this.power = power;
 
             this.buy = function() {
-                var.cancelPurchase = 0;
-                if(this.clickFunction) cancelPurchase=!this.clickFunction();
-                if(!cancelFunction) {
+                var cancelPurchase = 0;
+                if (this.clickFunction) cancelPurchase = !this.clickFunction();
+                if (!cancelFunction) {
                     var price = this.basePrice;
-                    if(Game.clicks >= price && !this.bought) {
+                    if ((Game.clicks >= price) && !this.bought) {
                         Game.Spend(price);
                         this.bought = 1;
-                        if(this.buyFunction) this.buyFunction();
+                        if (this.buyFunction) this.buyFunction();
                         Game.recalculateGains = 1;
                         Game.UpgradesOwned++;
                     }
@@ -228,11 +228,10 @@ Game.Launch = function() {
         };
 
         // Do you have this upgrade?
-        Game.Has=function(what)
-        {
-            return (Game.Upgrades[what]?Game.Upgrades[what].bought:0);
-        }
-        
+        Game.Has = function(what) {
+            return (Game.Upgrades[what] ? Game.Upgrades[what].bought : 0);
+        };
+
         // Initiate the canvas.
         Game.InitClicker();
     };
