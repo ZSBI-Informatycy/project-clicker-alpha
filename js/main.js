@@ -135,7 +135,7 @@ Game.Launch = function() {
             this.displayName = this.name;
             this.desc = desc;
             this.basePrice = price;
-            this.price = this.BasePrice;
+            this.price = this.basePrice;
             this.cps = cps;
             this.totalClicks = 0;
             this.storedCps = 0;
@@ -185,10 +185,58 @@ Game.Launch = function() {
 
             return this;
         };
+
+        //---------------------------//
+        // Upgrades
+        //---------------------------//
+        Game.Upgrades = [];
+        Game.UpgradesById = [];
+        Game.UpgradesN = 0;
+        Game.UpgradesOwned = 0;
+
+        Game.Upgrade = function(name, desc, price, icon, buyFunction) {
+            this.id = Game.UpgradesN;
+            this.name = name;
+            this.desc = desc;
+            this.basePrice = price;
+            this.icon = icon;
+            this.buyFunction = buyFunction;
+            this.unlocked = 0;
+            this.bought = 0;
+            this.hide = 0;
+            this.order = this.id;
+            if(order) this.order = order + this.id * 0.001;
+            this.type = '';
+            if(type) this.type = type;
+            this.power = 0;
+            if(power) this.power = power;
+
+            this.buy = function() {
+                var.cancelPurchase = 0;
+                if(this.clickFunction) cancelPurchase=!this.clickFunction();
+                if(!cancelFunction) {
+                    var price = this.basePrice;
+                    if(Game.clicks >= price && !this.bought) {
+                        Game.Spend(price);
+                        this.bought = 1;
+                        if(this.buyFunction) this.buyFunction();
+                        Game.recalculateGains = 1;
+                        Game.UpgradesOwned++;
+                    }
+                }
+            };
+        };
+
+        // Do you have this upgrade?
+        Game.Has=function(what)
+        {
+            return (Game.Upgrades[what]?Game.Upgrades[what].bought:0);
+        }
         
+        // Initiate the canvas.
         Game.InitClicker();
     };
-    // Main document load module
+    // Main init module
     Game.Init();
 };
 
