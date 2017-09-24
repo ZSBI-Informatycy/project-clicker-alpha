@@ -309,6 +309,7 @@ body {
 
 #bigClicker {
     z-index: 2;
+    cursor: pointer;
     display: inline;
     position: absolute;
     top: 0;
