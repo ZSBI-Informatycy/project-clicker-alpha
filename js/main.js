@@ -102,7 +102,7 @@ Game.Launch = function() {
             for (var i in Game.Upgrades) {
                 var me = Game.Upgrades[i];
                 if (me.bought > 0) {
-                    if (me.type === 'mult' && Game.Has(me.name)) mult += me.power * 0.01;
+                    if (me.type === 'mult' && Game.HasUpgrade(me.name)) mult += me.power * 0.01;
                 }
             }
 
@@ -123,11 +123,11 @@ Game.Launch = function() {
         //---------------------------//
         // Buildings
         //---------------------------//
-        Game.priceIncrease = 1.15;
-        Game.Objects = [];
-        Game.ObjectsById = [];
-        Game.ObjectsN = 0;
-        Game.ObjectsOwned = 0;
+        Game.priceIncrease  = 1.15;
+        Game.Objects        = [];
+        Game.ObjectsById    = [];
+        Game.ObjectsN       = 0;
+        Game.ObjectsOwned   = 0;
 
         Game.Object = function(name, desc, icon, price, cps, drawFunction, buyFunction) {
             this.id = Game.ObjectsN;
@@ -189,11 +189,11 @@ Game.Launch = function() {
         //---------------------------//
         // Upgrades
         //---------------------------//
-        Game.Upgrades = [];
-        Game.UpgradesById = [];
-        Game.UpgradesN = 0;
-        Game.UpgradesOwned = 0;
-    
+        Game.Upgrades       = [];
+        Game.UpgradesById   = [];
+        Game.UpgradesN      = 0;
+        Game.UpgradesOwned  = 0;
+
         Game.Upgrade = function(name, desc, price, icon, buyFunction) {
             this.id = Game.UpgradesN;
             this.name = name;
@@ -228,9 +228,57 @@ Game.Launch = function() {
         };
 
         // Do you have this upgrade?
-        Game.Has = function(what) {
+        Game.HasUpgrade = function(what) {
             return (Game.Upgrades[what] ? Game.Upgrades[what].bought : 0);
         };
+
+        //---------------------------//
+        // Achievements
+        //---------------------------//
+        Game.Achievements       = [];
+        Game.AchievementsById   = [];
+        Game.AchievementsN      = 0;
+        Game.AchievementsOwned  = 0;
+
+        Game.Achievement = function(name, desc, icon, hide) {
+            this.id = Game.AchievementsN;
+            this.name = name;
+            this.desc = desc;
+            this.icon = icon;
+            this.won = 0;
+            this.disabled = 0;
+            this.hide = hide || 0;
+            this.order = this.id;
+            if(order) this.order = order = order + this.id * 0.001;
+
+            Game.Achievements[this.name] = this;
+            Game.AchievementsById[this.id] = this;
+            Game.AchievemntsN++;
+            return this;
+        }
+        
+        Game.Win = function(what) {
+            if(typeof what === 'string') {
+                if(Game.Achievements[what]) {
+                    if(Game.Achievements[what].won == 0) {
+                        Game.Achievements[what].won = 1;
+                        if (Game.Achievements[what].hide != 3) Game.AchievementsOwned++;
+                        Game.recalculateGains = 1;
+                    }
+                }
+            }
+            else {for (var i in what) {Game.Win(what[i]);}}
+        }
+
+        // Achievement check.
+        Game.HasAchievement = function(what) {
+            //return (Game.Achievements[what] ? Game.Achievements[what].won : 0);
+            if(Game.Achievements[what].won) {
+                return true;
+            } else {
+                return false;
+            }
+        }
 
         // Initiate the canvas.
         Game.InitClicker();
